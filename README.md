@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# AngularFirebase Episode 59 - Angular Chatbot with Dialogflow 
+# REX Voice Enabled Virtual Assistant
 
 Watch the [angular chatbot screencast](https://angularfirebase.com/lessons/chatbot-in-angular-with-dialogflow-api-ai/)
 
