@@ -5,32 +5,34 @@ body{background-image: url('../src/assets/background-bg.jpg'); background-repeat
     -moz-transition: .5s ease all;
     -o-transition: .5s ease all;
     transition: .5s ease all;}
-  .chatbot {
-    position: fixed;
-    right: 30px;
-    bottom: 40px;
-    height: 50px;
-    width: 50px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .chatbot::after{
-    content: "Let's Talk";
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: -30px;
-    white-space: nowrap;
-    font-weight: bold;
-    color: #fff;
-    border-radius: 5px;
-    background: #e20074;
-    width: 80px;
-    text-align: center;
-    margin-left: -40px;
-    line-height: 20px;
-    padding-bottom: 3px;
-    font-size: 13px;
-  }
+    .chatbot {
+      position: fixed;
+      right: 30px;
+      bottom: 40px;
+      height: 50px;
+      width: 50px;
+      -webkit-font-smoothing: antialiased;
+      cursor: pointer;
+      &::after{
+        content: "Let's Talk";
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: -30px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #fff;
+        border-radius: 5px;
+        background: #e20074;
+        width: 80px;
+        text-align: center;
+        margin-left: -40px;
+        line-height: 20px;
+        padding-bottom: 3px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+    }
 
   .bounce {
       animation: bounce 2s infinite;

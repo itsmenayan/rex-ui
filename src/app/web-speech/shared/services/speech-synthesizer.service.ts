@@ -18,7 +18,7 @@ export class SpeechSynthesizerService {
     window.speechSynthesis.onvoiceschanged = e => {
       this.voices = window.speechSynthesis.getVoices();
       // do speech synthesis stuff
-      console.log(this.voices);
+      // console.log(this.voices);
     }
     window.speechSynthesis.getVoices();
 
