@@ -19,7 +19,7 @@
             {{ message.content }}
           </div>
         </li>
-        <li>
+        <li *ngIf="message.sentBy === 'bot'">
           <div class="message-data">
             <span class="message-data-name"><i class="fa fa-circle online"></i> DT Assistant</span>
             <span class="message-data-time">{{message.timeStamp}} </span>
@@ -27,23 +27,26 @@
           <div class="message my-message">
             {{ message.content }}
           </div>
-          <div>&nbsp;</div>
-          <div class="loader" style="left: 0">
-            <img src="../../../assets/loader-icon-transparent.svg" style="display: block; width: 30px;" />
-          </div>
-        </li>
-        <li>
-          <p>
-            <input type="radio" id="test1" name="radio-group" checked>
-            <label for="test1">Apple</label>
-          </p>
-          <p>
-            <input type="radio" id="test2" name="radio-group">
-            <label for="test2">Peach</label>
-          </p>
         </li>
     </ng-container>
     </ul>
+    <div class="loader" style="left: 0">
+      <img src="../../../assets/loader-icon-transparent.svg" style="display: block; width: 30px;" />
+    </div>
+    <ol>
+      <li>
+        <p>
+          <input type="radio" id="test1" name="radio-group" checked>
+          <label for="test1">Yes</label>
+        </p>
+      </li>
+      <li>
+        <p>
+          <input type="radio" id="test2" name="radio-group">
+          <label for="test2">No</label>
+        </p>
+      </li>
+    </ol>
     <!-- <label for="nameField">Your Message</label> -->
 
   </div>

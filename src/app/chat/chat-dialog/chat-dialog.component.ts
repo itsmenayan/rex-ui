@@ -37,16 +37,16 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
-        var objDiv = document.getElementById("test");
+        var objDiv = document.getElementById("chatBot");
         objDiv.scrollTop = objDiv.scrollHeight;
 
         return acc.concat(val)
       });
-      
+
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
-    
+
 
     // this.chat.conversation.asObservable().subscribe(value =>{
     //   console.log(value);
@@ -108,11 +108,11 @@ export class ChatDialogComponent implements OnInit {
            const message = data.content;
            console.log("Final" + data.content);
            console.log("Final" + data.info);
-           
+
         if (data.info === 'final_transcript' && message.length > 0) {
           this.finalTranscript = `${this.finalTranscript}\n${message}`;
           console.log("Inside if " + this.finalTranscript);
-          
+
           // this.actionContext.processMessage(message, this.currentLanguage);
           this.detectChanges();
           // this.actionContext.runAction(message, this.currentLanguage);
@@ -131,7 +131,7 @@ export class ChatDialogComponent implements OnInit {
     if(this.isShow){
       this.chat.firstMessage("Hi John. How may I help you?");
     }else{
-      
+
     }
     this.isShow = !this.isShow;
   }

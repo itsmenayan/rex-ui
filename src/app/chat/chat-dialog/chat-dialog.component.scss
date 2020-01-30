@@ -297,9 +297,9 @@ $darkGray: #212121;
 
 .loader{
   display: inline-block;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
 }
 
 [type="radio"]:checked,
@@ -311,11 +311,13 @@ $darkGray: #212121;
 [type="radio"]:not(:checked) + label
 {
     position: relative;
-    padding-left: 28px;
+    padding-left: 24px;
     cursor: pointer;
-    line-height: 20px;
+    line-height: 16px;
     display: inline-block;
     color: #666;
+    font-size: 14px;
+    font-weight: normal;
 }
 [type="radio"]:checked + label:before,
 [type="radio"]:not(:checked) + label:before {
@@ -336,8 +338,8 @@ $darkGray: #212121;
     height: 12px;
     background: $magenta;
     position: absolute;
-    top: 4px;
-    left: 4px;
+    top: 3px;
+    left: 3px;
     border-radius: 100%;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
@@ -351,4 +353,19 @@ $darkGray: #212121;
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
+}
+
+ol{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  li{
+    width: auto;
+    float: left;
+    margin-right: 20px;
+    p{
+      margin: 0px;
+      font-size: 13px;
+    }
+  }
 }
