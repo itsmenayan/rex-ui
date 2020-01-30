@@ -5,6 +5,7 @@ import 'rxjs/add/operator/scan';
 import { SpeechRecognizerService } from '../../web-speech/shared/services/speech-recognizer.service';
 import { SpeechSynthesizerService } from '../../web-speech/shared/services/speech-synthesizer.service';
 import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
+import { $ } from 'protractor';
 
 
 
@@ -24,6 +25,8 @@ export class ChatDialogComponent implements OnInit {
   languages: string[] = ['en-US', 'es-ES'];
   currentLanguage: string;
 
+  isShow = true;
+
   constructor(public chat: ChatService, private changeDetector: ChangeDetectorRef,
     private speechRecognizer: SpeechRecognizerService,
     private speechSynthesizerService: SpeechSynthesizerService) { }
@@ -34,6 +37,9 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
+
+        var objDiv = document.getElementById("chatBot");
+        objDiv.scrollTop = objDiv.scrollHeight;
 
 
         return acc.concat(val)
@@ -61,7 +67,7 @@ export class ChatDialogComponent implements OnInit {
   startButton(event) {
     this.finalTranscript = '';
     this.speechRecognizer.start(event.timeStamp);
-    
+
   }
 
   stopButton(event) {
@@ -90,7 +96,7 @@ export class ChatDialogComponent implements OnInit {
     this.speechRecognizer.onEnd()
       .subscribe(data => {
         console.log(this.finalTranscript);
-        
+
         this.recognizing = false;
         this.detectChanges();
         this.notification = null;
@@ -112,6 +118,11 @@ export class ChatDialogComponent implements OnInit {
 
   detectChanges() {
     this.changeDetector.detectChanges();
+  }
+
+  closeChatBot() {
+    console.log('close chat bot');
+    this.isShow = !this.isShow;
   }
 
 

@@ -31,26 +31,26 @@ body{background-image: url('../src/assets/background-bg.jpg'); background-repeat
     padding-bottom: 3px;
     font-size: 13px;
   }
-  
+
   .bounce {
       animation: bounce 2s infinite;
       -webkit-animation: bounce 2s infinite;
       -moz-animation: bounce 2s infinite;
       -o-animation: bounce 2s infinite;
   }
-  
+
   @-webkit-keyframes bounce {
       0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
       40% {-webkit-transform: translateY(-30px);}
       60% {-webkit-transform: translateY(-15px);}
   }
-  
+
   @-moz-keyframes bounce {
       0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
       40% {-moz-transform: translateY(-30px);}
       60% {-moz-transform: translateY(-15px);}
   }
-  
+
   @-o-keyframes bounce {
       0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
       40% {-o-transform: translateY(-30px);}
@@ -61,4 +61,3 @@ body{background-image: url('../src/assets/background-bg.jpg'); background-repeat
       40% {transform: translateY(-30px);}
       60% {transform: translateY(-15px);}
   }
-  
