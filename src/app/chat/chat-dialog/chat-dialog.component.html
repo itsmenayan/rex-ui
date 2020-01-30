@@ -7,7 +7,7 @@
     </div>
     <i class="fa fa-close"></i>
   </div>
-  <div class="chat-history">
+  <div class="chat-history" id="test">
     <ng-container *ngFor="let message of messages | async">
 
       <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
@@ -16,7 +16,6 @@
       </div>
 
     </ng-container>
-    <label for="nameField">Your Message</label>
   <!-- <ul>
     <li class="clearfix">
       <div class="message-data align-right">
@@ -98,7 +97,7 @@
 
 <button (click)="sendMessage()">Send</button>
 <button (click)="startButton($event)">Record</button>
-<button (click)="stopButton($event)">Stop Record</button>
+<button (click)="stopButton()">Stop Record</button>
 
 
 </div>

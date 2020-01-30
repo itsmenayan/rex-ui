@@ -34,11 +34,12 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
-
+        var objDiv = document.getElementById("test");
+        objDiv.scrollTop = objDiv.scrollHeight;
 
         return acc.concat(val)
       });
-
+      
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
@@ -64,8 +65,10 @@ export class ChatDialogComponent implements OnInit {
     
   }
 
-  stopButton(event) {
-    //if(this.finalTranscript != '')
+  stopButton() {
+    this.detectChanges();
+    console.log("Stop" + this.finalTranscript);
+    if(this.finalTranscript != '')
       this.chat.converse(this.finalTranscript);
     this.speechRecognizer.stop();
     this.speechSynthesizerService.speak(this.finalTranscript, 'en-US');
@@ -98,9 +101,14 @@ export class ChatDialogComponent implements OnInit {
 
     this.speechRecognizer.onResult()
       .subscribe((data: SpeechNotification) => {
-        const message = data.content.trim();
+           const message = data.content;
+           console.log("Final" + data.content);
+           console.log("Final" + data.info);
+           
         if (data.info === 'final_transcript' && message.length > 0) {
           this.finalTranscript = `${this.finalTranscript}\n${message}`;
+          console.log("Inside if " + this.finalTranscript);
+          
           // this.actionContext.processMessage(message, this.currentLanguage);
           this.detectChanges();
           // this.actionContext.runAction(message, this.currentLanguage);
