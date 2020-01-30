@@ -2,8 +2,8 @@
   <div class="chat-header clearfix">
     <img src="../../../assets/dt-logo.jpg" alt="avatar">
     <div class="chat-about">
-      <div class="chat-with">Chat with Umesh Bhati</div>
-      <div class="chat-num-messages">already 1 902 messages</div>
+      <div class="chat-with">Chat with John</div>
+      <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
     </div>
     <i class="fa fa-close" (click)="closeChatBot()"></i>
   </div>
@@ -12,8 +12,8 @@
     <ng-container *ngFor="let message of messages | async">
         <li class="clearfix" *ngIf="message.sentBy === 'user'">
           <div class="message-data align-right">
-            <span class="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
-            <span class="message-data-name">Umesh Bhati</span> <i class="fa fa-circle me"></i>
+            <span class="message-data-time">{{message.timeStamp}}</span> &nbsp; &nbsp;
+            <span class="message-data-name">John</span> <i class="fa fa-circle me"></i>
           </div>
           <div class="message other-message float-right">
             {{ message.content }}
@@ -22,7 +22,7 @@
         <li>
           <div class="message-data">
             <span class="message-data-name"><i class="fa fa-circle online"></i> DT Assistant</span>
-            <span class="message-data-time">10:12 AM, Today</span>
+            <span class="message-data-time">{{message.timeStamp}} </span>
           </div>
           <div class="message my-message">
             {{ message.content }}
@@ -84,7 +84,7 @@
 
 <button (click)="sendMessage()">Send</button>
 <button (click)="startButton($event)">Record</button>
-<button (click)="stopButton($event)">Stop Record</button>
+<button (click)="stopButton()">Stop Record</button>
 
 
 </div>
