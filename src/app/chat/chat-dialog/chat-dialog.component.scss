@@ -105,13 +105,13 @@ $darkGray: #212121;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.38);
 
   .chat-header {
-    padding: 20px;
+    padding: 10px 20px;
     border-bottom: 2px solid #cacacc;
 
     img {
       float: left;
       display: block;
-      max-width: 55px;
+      max-width: 45px;
       border-radius: 50%;
       border: 2px solid $magenta;
     }
@@ -369,3 +369,36 @@ ol{
     }
   }
 }
+.overlayHide{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.44);
+  -webkit-transition: .5s ease all;
+  -moz-transition: .5s ease all;
+  -o-transition: .5s ease all;
+  transition: .5s ease all;
+  opacity: 0;
+}
+
+.overlayShow {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.44);
+  -webkit-transition: .5s ease all;
+  -moz-transition: .5s ease all;
+  -o-transition: .5s ease all;
+  transition: .5s ease all;
+  opacity: 1;
+}
+
+// .overlayShow:after {
+//   content: '';
+//   display: block;
+//   height: 100%;
+//   width: 100%;
+
+// }

@@ -65,6 +65,7 @@
 <div class="chatbot" (click)="closeChatBot()" [ngClass]="isShow ? 'bounce' : 'chatbot'">
   <img src="../assets/chatbot.svg" />
 </div>
+<div [ngClass]="isShow ? 'overlayHide' : 'overlayShow'"></div>
 
 
 <div style="display: none; background-color: black;">
