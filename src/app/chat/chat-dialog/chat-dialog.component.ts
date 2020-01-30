@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import { ChatService, Message } from '../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
@@ -7,6 +7,23 @@ import { SpeechSynthesizerService } from '../../web-speech/shared/services/speec
 import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
 import { $ } from 'protractor';
 
+@Pipe({
+  name: 'objectValues'
+})
+export class ObjectValuesPipe implements PipeTransform {
+  transform(obj: any) {
+    let result = [];
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push({
+          "id": key,
+          "value" : obj[key]
+        });
+      }
+    }
+    return result;
+  }
+}
 
 
 @Component({
@@ -18,7 +35,7 @@ export class ChatDialogComponent implements OnInit {
 
   messages: Observable<Message[]>;
   formValue: string;
-  recognition;
+  recognition:boolean = false;
   finalTranscript = '';
   recognizing = false;
   notification: string;
@@ -37,17 +54,20 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
-        this.recognition = false;
+        if(val[0].sentBy=='bot')
+          this.recognition = false;
         var objDiv = document.getElementById("chatBot");
         objDiv.scrollTop = objDiv.scrollHeight;
 
         return acc.concat(val)
       });
+
       
+
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
-    
+
 
     // this.chat.conversation.asObservable().subscribe(value =>{
     //   console.log(value);
@@ -112,11 +132,11 @@ export class ChatDialogComponent implements OnInit {
            const message = data.content;
            console.log("Final" + data.content);
            console.log("Final" + data.info);
-           
+
         if (data.info === 'final_transcript' && message.length > 0) {
           this.finalTranscript = `${this.finalTranscript}\n${message}`;
           console.log("Inside if " + this.finalTranscript);
-          
+
           // this.actionContext.processMessage(message, this.currentLanguage);
           this.detectChanges();
           // this.actionContext.runAction(message, this.currentLanguage);
@@ -135,7 +155,7 @@ export class ChatDialogComponent implements OnInit {
     if(this.isShow){
       this.chat.firstMessage("Hi Nayan. How may I help you?");
     }else{
-      
+
     }
     this.isShow = !this.isShow;
   }

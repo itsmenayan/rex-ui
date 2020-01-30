@@ -34,6 +34,18 @@ body{background-image: url('../src/assets/background-bg.jpg'); background-repeat
       }
     }
 
+    body:after {
+        content: '';
+        display: block;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.38);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
   .bounce {
       animation: bounce 2s infinite;
       -webkit-animation: bounce 2s infinite;
