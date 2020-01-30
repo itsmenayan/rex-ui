@@ -10,7 +10,7 @@
   <div class="chat-history">
     <ul id="chatBot">
     <ng-container *ngFor="let message of messages | async">
-        <li class="clearfix" *ngIf="message.sentBy === 'user'">
+        <li class="clearfix" *ngIf="message.sentBy == 'user'">
           <div class="message-data align-right">
             <span class="message-data-time">{{message.timeStamp}}</span> &nbsp; &nbsp;
             <span class="message-data-name">John</span> <i class="fa fa-circle me"></i>

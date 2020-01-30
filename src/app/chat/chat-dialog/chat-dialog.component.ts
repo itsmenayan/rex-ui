@@ -37,7 +37,8 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
-        var objDiv = document.getElementById("test");
+        this.recognition = false;
+        var objDiv = document.getElementById("chatBot");
         objDiv.scrollTop = objDiv.scrollHeight;
 
         return acc.concat(val)
@@ -56,6 +57,7 @@ export class ChatDialogComponent implements OnInit {
   }
 
   sendMessage() {
+    this.recognition = true;
     this.chat.converse(this.formValue);
     this.formValue = '';
   }
@@ -72,8 +74,10 @@ export class ChatDialogComponent implements OnInit {
   stopButton() {
     this.detectChanges();
     console.log("Stop" + this.finalTranscript);
-    if(this.finalTranscript != '')
+    if(this.finalTranscript != ''){
+      this.recognition = true;
       this.chat.converse(this.finalTranscript);
+    }
     this.speechRecognizer.stop();
     this.speechSynthesizerService.speak(this.finalTranscript, 'en-US');
 
@@ -129,7 +133,7 @@ export class ChatDialogComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi John. How may I help you?");
+      this.chat.firstMessage("Hi Nayan. How may I help you?");
     }else{
       
     }
