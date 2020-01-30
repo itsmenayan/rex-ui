@@ -7,9 +7,9 @@
     </div>
     <i class="fa fa-close" (click)="closeChatBot()"></i>
   </div>
-  <div class="chat-history" id="chatBot">
+  <div class="chat-history">
+    <ul id="chatBot">
     <ng-container *ngFor="let message of messages | async">
-      <ul>
         <li class="clearfix" *ngIf="message.sentBy === 'user'">
           <div class="message-data align-right">
             <span class="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
@@ -19,7 +19,7 @@
             {{ message.content }}
           </div>
         </li>
-        <li *ngIf="message.sentBy === 'bot'">
+        <li>
           <div class="message-data">
             <span class="message-data-name"><i class="fa fa-circle online"></i> DT Assistant</span>
             <span class="message-data-time">10:12 AM, Today</span>
@@ -27,11 +27,13 @@
           <div class="message my-message">
             {{ message.content }}
           </div>
+          <div>&nbsp;</div>
+          <div class="loader" style="left: 0">
+            <img src="../../../assets/loader-icon-transparent.svg" style="display: block; width: 30px;" />
+          </div>
         </li>
-
-      </ul>
-
     </ng-container>
+    </ul>
     <!-- <label for="nameField">Your Message</label> -->
 
   </div>
@@ -47,7 +49,7 @@
   </div>
 </div>
 
-<div class="chatbot bounce" (click)="closeChatBot()">
+<div class="chatbot" (click)="closeChatBot()" [ngClass]="isShow ? 'bounce' : 'chatbot'">
   <img src="../assets/chatbot.svg" />
 </div>
 

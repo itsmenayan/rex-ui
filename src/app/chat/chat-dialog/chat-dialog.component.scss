@@ -71,7 +71,7 @@ $darkGray: #212121;
 
     li {
       padding-bottom: 20px;
-      list-style: none
+      list-style: none;
     }
   }
 
@@ -152,6 +152,9 @@ $darkGray: #212121;
   }
   ul{
     list-style: none;
+    li{
+      position: relative;
+    }
   }
 
   .chat-history {
@@ -198,6 +201,7 @@ $darkGray: #212121;
 
     .my-message {
       background: $magenta;
+      margin-bottom: 10px;
     }
 
     .other-message {
@@ -289,4 +293,11 @@ $darkGray: #212121;
 	content: " ";
 	clear: both;
 	height: 0;
+}
+
+.loader{
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
