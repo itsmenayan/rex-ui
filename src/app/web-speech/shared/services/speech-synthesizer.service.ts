@@ -28,7 +28,7 @@ export class SpeechSynthesizerService {
 
     this.message.lang = language;
     this.message.text = message;
-    this.message.voice = this.voices[54];
+    this.message.voice = this.voices[0];
     speechSynthesis.speak(this.message);
   }
 }

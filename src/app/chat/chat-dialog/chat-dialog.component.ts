@@ -5,6 +5,7 @@ import 'rxjs/add/operator/scan';
 import { SpeechRecognizerService } from '../../web-speech/shared/services/speech-recognizer.service';
 import { SpeechSynthesizerService } from '../../web-speech/shared/services/speech-synthesizer.service';
 import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
+import { $ } from 'protractor';
 
 
 
@@ -23,6 +24,8 @@ export class ChatDialogComponent implements OnInit {
   notification: string;
   languages: string[] = ['en-US', 'es-ES'];
   currentLanguage: string;
+
+  isShow = true;
 
   constructor(public chat: ChatService, private changeDetector: ChangeDetectorRef,
     private speechRecognizer: SpeechRecognizerService,
@@ -43,6 +46,7 @@ export class ChatDialogComponent implements OnInit {
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
+    
 
     // this.chat.conversation.asObservable().subscribe(value =>{
     //   console.log(value);
@@ -62,7 +66,7 @@ export class ChatDialogComponent implements OnInit {
   startButton(event) {
     this.finalTranscript = '';
     this.speechRecognizer.start(event.timeStamp);
-    
+
   }
 
   stopButton() {
@@ -93,7 +97,7 @@ export class ChatDialogComponent implements OnInit {
     this.speechRecognizer.onEnd()
       .subscribe(data => {
         console.log(this.finalTranscript);
-        
+
         this.recognizing = false;
         this.detectChanges();
         this.notification = null;
@@ -120,6 +124,16 @@ export class ChatDialogComponent implements OnInit {
 
   detectChanges() {
     this.changeDetector.detectChanges();
+  }
+
+  closeChatBot() {
+    console.log('close chat bot');
+    if(this.isShow){
+      this.chat.firstMessage("Hi John. How may I help you?");
+    }else{
+      
+    }
+    this.isShow = !this.isShow;
   }
 
 
