@@ -89,6 +89,8 @@ export class ChatDialogComponent implements OnInit {
 
     this.speechRecognizer.onEnd()
       .subscribe(data => {
+        console.log(this.finalTranscript);
+        
         this.recognizing = false;
         this.detectChanges();
         this.notification = null;
