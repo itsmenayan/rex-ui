@@ -65,8 +65,9 @@ export class ChatDialogComponent implements OnInit {
   }
 
   stopButton(event) {
+    //if(this.finalTranscript != '')
+      this.chat.converse(this.finalTranscript);
     this.speechRecognizer.stop();
-    this.chat.converse(this.finalTranscript);
     this.speechSynthesizerService.speak(this.finalTranscript, 'en-US');
 
   }
