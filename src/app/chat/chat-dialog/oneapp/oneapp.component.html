@@ -7,7 +7,7 @@
   <div class="chat-header clearfix" >
     <img src="../../../assets/dt-logo.jpg" alt="avatar">
     <div class="chat-about">
-      <div class="chat-with">Chat with John</div>
+      <div class="chat-with">DT Assistant</div>
       <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
     </div>
     <i class="fa fa-close" (click)="closeChatBot()"></i>
@@ -26,7 +26,7 @@
         </li>
         <li *ngIf="message.sentBy === 'bot'">
           <div class="message-data">
-            <span class="message-data-name"><i class="fa fa-circle online"></i> DT Assistant</span>
+            <span class="message-data-name"><i class="fa fa-circle online"></i> DeeDee</span>
             <span class="message-data-time">{{message.timeStamp}} </span>
           </div>
           <div class="message my-message">
@@ -101,38 +101,7 @@
 
     <!-- <label for="nameField">Your Message</label> -->
 
-    <div class="you-also-like">
-      <h1><span>You may also like</span></h1>
-      <ol class="recommended-order">
-        <li>
-          <div class="order-blk">
-            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
-            <div class="order-cont">
-              Apple iPhone 11 Pro (64GB) - Space Grey
-              <button>Buy Now</button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="order-blk">
-            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
-            <div class="order-cont">
-              Apple iPhone 11 Pro (64GB) - Space Grey
-              <button>Buy Now</button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="order-blk">
-            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
-            <div class="order-cont">
-              Apple iPhone 11 Pro (64GB) - Space Grey
-              <button>Buy Now</button>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </div>
+   
 
   </div>
   <div class="chat-message clearfix">

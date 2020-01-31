@@ -66,8 +66,8 @@ export class OneshopComponent implements OnInit {
         }
 
           
-        var objDiv = document.getElementById("chatBot");
-        objDiv.scrollTop = objDiv.scrollHeight +100;
+        // var objDiv = document.getElementById("chatBot");
+        // objDiv.scrollTop = objDiv.scrollHeight +100;
 
         return acc.concat(val)
       });
@@ -164,7 +164,7 @@ export class OneshopComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi OneShop User. How may I help you?");
+      this.chat.firstMessage("Hi John. How may I help you?");
     }else{
 
     }

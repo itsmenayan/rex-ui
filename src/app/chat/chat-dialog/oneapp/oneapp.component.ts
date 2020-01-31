@@ -65,7 +65,12 @@ export class OneappComponent implements OnInit {
           console.log("before data", val[0].data.data);
           this.createChart(val[0].data.data);
           console.log("after data", val[0].data.data);
+          
         }
+
+      //   if(val[0].data != null && val[0].data.intent != null){
+      //     this.chat.converse(val[0].data.intent,'');
+      // }
 
           
         var objDiv = document.getElementById("chatBot");
@@ -166,7 +171,7 @@ export class OneappComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi OneApp User. How may I help you?");
+      this.chat.firstMessage("Hi Will. How may I help you?");
     }else{
 
     }
@@ -268,20 +273,8 @@ export class OneappComponent implements OnInit {
       },
       series: [{
         type: 'spline',
-        name: 'Calls',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-    }, {
-      type: 'spline',
-        name: 'SMS',
-        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-    }, {
-      type: 'spline',
-        name: 'Data',
-        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-    }, {
-      type: 'spline',
         name: 'Amount',
-        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+        data: [20, 22, 23, 25, 19, 22, 24, 40]
     }]
   });
   return chart;

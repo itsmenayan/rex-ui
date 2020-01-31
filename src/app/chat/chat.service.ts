@@ -31,11 +31,11 @@ export class ChatService {
 
   // Sends and receives messages via DialogFlow
   converse(msg: string,userName:string) {
-    
+    debugger
     const userMessage = new Message(msg, 'user',this.getTimeStamp(),null);
-    if(msg.toLowerCase() != userName.toLowerCase())
+    if(msg.toLowerCase() != userName.toLowerCase() && userName != '')
       this.update(userMessage);
-
+     
     return this.client.textRequest(msg)
                .then(res => {
                  console.log("_____");
@@ -47,12 +47,16 @@ export class ChatService {
                  
                   const speech = obj.result.fulfillment.messages[0].speech;
                   const botMessage = new Message(speech, 'bot',this.getTimeStamp(),obj.result.fulfillment.data);
+                  if(obj.result.fulfillment.data != undefined && obj.result.fulfillment.data.intent != null && obj.result.fulfillment.data.intent != ""){
+                    this.converse(obj.result.fulfillment.data.intent,'');
+                  }
                   if(speech.toLowerCase().includes("username")){
                       this.converse(userName,userName);
                   }else{
                     this.speechSynthesizerService.speak(speech, 'en-US');
                     this.update(botMessage);
                   }
+                   
                   
                   this.payload.next(obj.result.fulfillment.data);
                });
