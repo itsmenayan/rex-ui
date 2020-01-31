@@ -57,22 +57,22 @@ export class OneshopComponent implements OnInit {
         console.log(val);
         if(val[0].sentBy=='bot')
           this.recognition = false;
-        
-        
+
+
         if(val[0].data != null && val[0].data.type == 'CHART'){
           console.log("before data", val[0].data.data);
           this.createChart(val[0].data.data);
           console.log("after data", val[0].data.data);
         }
 
-          
+
         var objDiv = document.getElementById("chatBot");
         objDiv.scrollTop = objDiv.scrollHeight +100;
 
         return acc.concat(val)
       });
 
-      
+
 
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
@@ -85,7 +85,7 @@ export class OneshopComponent implements OnInit {
 
 
   }
-  
+
 
   sendMessage() {
     this.recognition = true;
@@ -172,10 +172,10 @@ export class OneshopComponent implements OnInit {
   }
 
   createPieChart(data){
-    
+
     var chartData:any[] = [];
     for(var obj in data){
-      
+
       if(!isNaN(data[obj])){
         chartData.push({
           name: obj,
@@ -183,11 +183,11 @@ export class OneshopComponent implements OnInit {
           sliced: obj == 'calls' ? true: false,
           selected: false,
           color : obj == 'calls' ? 'red': ''
-          
+
        });
       }
     }
-    
+
     var chart = new Chart( {
     exporting: {
       chartOptions: { // specific options for the exported image
@@ -215,14 +215,14 @@ export class OneshopComponent implements OnInit {
 
   createChart(data:any){
     console.log(" createChart start",data);
-    
+
       for (let index = 0; index < data.charts.length; index++) {
         const element = data.charts[index];
         if(element.type == 'PIE'){
           data.charts[index] = this.createPieChart(element.chart_data);
         }else if(element.type == 'LINE'){
           data.charts[index] = this.createLineChart(element.chart_data);
-        
+
       }
       //data.charts.pop();
       console.log(" createChart end",data);
@@ -233,7 +233,7 @@ export class OneshopComponent implements OnInit {
 
     var chartData:any[] = [];
     for(var obj in data){
-      
+
       if(!isNaN(data[obj])){
         chartData.push({
           name: obj,
@@ -241,7 +241,7 @@ export class OneshopComponent implements OnInit {
           sliced: obj == 'calls' ? true: false,
           selected: false,
           color : obj == 'calls' ? 'red': ''
-          
+
        });
       }
     }
