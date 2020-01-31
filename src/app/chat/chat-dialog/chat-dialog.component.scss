@@ -419,3 +419,68 @@ td:first-child, th:first-child {
 .table td{
   font-size: 14px;
 }
+
+.highcharts-credits {
+  display: none !important;
+}
+.order-blk {
+  display: block;
+  max-width: 250px;
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  img{
+    display: block;
+    width: 100%;
+  }
+  .order-cont {
+    padding: 0px 10px 15px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 13px;
+    button{
+      background: $magenta;
+      border-color: $magenta;
+      height: 3.2rem;
+      letter-spacing: .1rem;
+      line-height: 3rem;
+      padding: 0 2.0rem;
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+  }
+}
+.you-also-like{
+  h1{
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      background: #ccc;
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      top: 11px;
+      left: 0px;
+    }
+    span{
+      padding: 10px;
+      position: relative;
+      background: $white;
+      z-index: 1;
+    }
+  }
+  ol.recommended-order{
+    li{
+      width: calc(33.333% - 20px);
+      float: left;
+    }
+  }
+}

@@ -39,7 +39,7 @@
                 <div *ngFor="let chart of message.data.data.charts">
                   <div [chart]="chart"></div>
                 </div>
-                
+
           </div>
         </li>
     </ng-container>
@@ -61,7 +61,7 @@
         </p>
       </li>
     </ol>
-    
+
 
     <table class="table" *ngIf="false">
       <thead class="thead-dark">
@@ -93,7 +93,40 @@
         </tr>
       </tbody>
     </table>
-    
+
+    <div class="you-also-like">
+      <h1><span>You may also like</span></h1>
+      <ol class="recommended-order">
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
     <!-- <label for="nameField">Your Message</label> -->
 
   </div>
