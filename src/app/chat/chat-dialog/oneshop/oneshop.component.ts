@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
-import { ChatService, Message } from '../chat.service';
+import { ChatService, Message } from '../../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
-import { SpeechRecognizerService } from '../../web-speech/shared/services/speech-recognizer.service';
-import { SpeechSynthesizerService } from '../../web-speech/shared/services/speech-synthesizer.service';
-import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
+import { SpeechRecognizerService } from '../../../web-speech/shared/services/speech-recognizer.service';
+import { SpeechSynthesizerService } from '../../../web-speech/shared/services/speech-synthesizer.service';
+import { SpeechNotification } from '../../../web-speech/shared/model/speech-notification';
 import { Chart } from 'angular-highcharts';
+
 
 @Pipe({
   name: 'objectValues'
@@ -25,13 +26,12 @@ export class ObjectValuesPipe implements PipeTransform {
   }
 }
 
-
 @Component({
-  selector: 'chat-dialog',
-  templateUrl: './chat-dialog.component.html',
-  styleUrls: ['./chat-dialog.component.scss'],
+  selector: 'oneshop',
+  templateUrl: './oneshop.component.html',
+  styleUrls: ['./oneshop.component.scss']
 })
-export class ChatDialogComponent implements OnInit {
+export class OneshopComponent implements OnInit {
 
   messages: Observable<Message[]>;
   formValue: string;
@@ -89,7 +89,7 @@ export class ChatDialogComponent implements OnInit {
 
   sendMessage() {
     this.recognition = true;
-    this.chat.converse(this.formValue,'Will');
+    this.chat.converse(this.formValue,'John');
     this.formValue = '';
   }
 
@@ -107,7 +107,7 @@ export class ChatDialogComponent implements OnInit {
     console.log("Stop" + this.finalTranscript);
     if(this.finalTranscript != ''){
       this.recognition = true;
-      this.chat.converse(this.finalTranscript,'Will');
+      this.chat.converse(this.finalTranscript,'John');
     }
     this.speechRecognizer.stop();
     this.speechSynthesizerService.speak(this.finalTranscript, 'en-US');
@@ -164,7 +164,7 @@ export class ChatDialogComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi Nayan. How may I help you?");
+      this.chat.firstMessage("Hi OneShop User. How may I help you?");
     }else{
 
     }

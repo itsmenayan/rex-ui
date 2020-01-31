@@ -30,10 +30,10 @@ export class ChatService {
   constructor(private zone: NgZone,private speechSynthesizerService: SpeechSynthesizerService) {}
 
   // Sends and receives messages via DialogFlow
-  converse(msg: string) {
+  converse(msg: string,userName:string) {
     
     const userMessage = new Message(msg, 'user',this.getTimeStamp(),null);
-    if(msg.toLowerCase() != "will")
+    if(msg.toLowerCase() != userName.toLowerCase())
       this.update(userMessage);
 
     return this.client.textRequest(msg)
@@ -48,7 +48,7 @@ export class ChatService {
                   const speech = obj.result.fulfillment.messages[0].speech;
                   const botMessage = new Message(speech, 'bot',this.getTimeStamp(),obj.result.fulfillment.data);
                   if(speech.toLowerCase().includes("username")){
-                      this.converse("Will");
+                      this.converse(userName,userName);
                   }else{
                     this.speechSynthesizerService.speak(speech, 'en-US');
                     this.update(botMessage);

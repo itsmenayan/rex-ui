@@ -8,6 +8,7 @@ import { SpeechRecognizerService } from './web-speech/shared/services/speech-rec
 import { SpeechSynthesizerService } from './web-speech/shared/services/speech-synthesizer.service';
 import { WebSpeechComponent } from './web-speech/web-speech.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
