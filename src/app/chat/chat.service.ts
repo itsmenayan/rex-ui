@@ -33,7 +33,8 @@ export class ChatService {
   converse(msg: string) {
     
     const userMessage = new Message(msg, 'user',this.getTimeStamp(),null);
-    this.update(userMessage);
+    if(msg.toLowerCase() != "will")
+      this.update(userMessage);
 
     return this.client.textRequest(msg)
                .then(res => {
@@ -46,8 +47,13 @@ export class ChatService {
                  
                   const speech = obj.result.fulfillment.messages[0].speech;
                   const botMessage = new Message(speech, 'bot',this.getTimeStamp(),obj.result.fulfillment.data);
-                  this.speechSynthesizerService.speak(speech, 'en-US');
-                  this.update(botMessage);
+                  if(speech.toLowerCase().includes("username")){
+                      this.converse("Will");
+                  }else{
+                    this.speechSynthesizerService.speak(speech, 'en-US');
+                    this.update(botMessage);
+                  }
+                  
                   this.payload.next(obj.result.fulfillment.data);
                });
   }
