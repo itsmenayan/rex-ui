@@ -2,13 +2,13 @@
   <div class="chat-header clearfix">
     <img src="../../../assets/dt-logo.jpg" alt="avatar">
     <div class="chat-about">
-      <div class="chat-with">Chat with John {{recognition}}</div>
+      <div class="chat-with">Chat with John</div>
       <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
     </div>
     <i class="fa fa-close" (click)="closeChatBot()"></i>
   </div>
-  <div class="chat-history">
-    <ul id="chatBot">
+  <div class="chat-history" id="chatBot">
+    <ul >
     <ng-container *ngFor="let message of messages | async">
         <li class="clearfix" *ngIf="message.sentBy == 'user'">
           <div class="message-data align-right">
@@ -35,6 +35,12 @@
               </tr>
             </tbody>
           </table>
+          <div  *ngIf="message.data != null && message.data.type == 'CHART'">
+                <div *ngFor="let chart of message.data.data.charts">
+                  <div [chart]="chart"></div>
+                </div>
+                
+          </div>
         </li>
     </ng-container>
     </ul>
@@ -87,6 +93,7 @@
         </tr>
       </tbody>
     </table>
+    
     <!-- <label for="nameField">Your Message</label> -->
 
   </div>
@@ -108,7 +115,7 @@
 
 
 <div style="display: none; background-color: black;">
-<h1>Umesh Bhati! </h1>
+<h1>John </h1>
 
 <ng-container *ngFor="let message of messages | async">
 

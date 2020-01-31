@@ -5,7 +5,7 @@ import 'rxjs/add/operator/scan';
 import { SpeechRecognizerService } from '../../web-speech/shared/services/speech-recognizer.service';
 import { SpeechSynthesizerService } from '../../web-speech/shared/services/speech-synthesizer.service';
 import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
-import { $ } from 'protractor';
+import { Chart } from 'angular-highcharts';
 
 @Pipe({
   name: 'objectValues'
@@ -41,6 +41,7 @@ export class ChatDialogComponent implements OnInit {
   notification: string;
   languages: string[] = ['en-US', 'es-ES'];
   currentLanguage: string;
+  chart:any;
 
   isShow = true;
 
@@ -52,12 +53,21 @@ export class ChatDialogComponent implements OnInit {
     // appends to array after each new message is added to feedSource
     this.messages = this.chat.conversation.asObservable()
       .scan((acc, val) => {
-        console.log(acc);
+        console.log("Val");
         console.log(val);
         if(val[0].sentBy=='bot')
           this.recognition = false;
+        
+        
+        if(val[0].data != null && val[0].data.type == 'CHART'){
+          console.log("before data", val[0].data.data);
+          this.createChart(val[0].data.data);
+          console.log("after data", val[0].data.data);
+        }
+
+          
         var objDiv = document.getElementById("chatBot");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        objDiv.scrollTop = objDiv.scrollHeight +100;
 
         return acc.concat(val)
       });
@@ -75,6 +85,7 @@ export class ChatDialogComponent implements OnInit {
 
 
   }
+  
 
   sendMessage() {
     this.recognition = true;
@@ -159,6 +170,121 @@ export class ChatDialogComponent implements OnInit {
     }
     this.isShow = !this.isShow;
   }
+
+  createPieChart(data){
+    
+    var chartData:any[] = [];
+    for(var obj in data){
+      
+      if(!isNaN(data[obj])){
+        chartData.push({
+          name: obj,
+          y: +data[obj],
+          sliced: obj == 'calls' ? true: false,
+          selected: false,
+          color : obj == 'calls' ? 'red': ''
+          
+       });
+      }
+    }
+    
+    var chart = new Chart( {
+    exporting: {
+      chartOptions: { // specific options for the exported image
+          plotOptions: {
+              series: {
+                  dataLabels: {
+                      enabled: true
+                  }
+              }
+          }
+      },
+      fallbackToExportServer: false
+  },
+    title: {
+        text: 'Usasge Details'
+    },
+    series: [{
+      type: 'pie',
+      name: 'Usage Details',
+      data: chartData
+   }]
+});
+  return chart;
+  }
+
+  createChart(data:any){
+    console.log(" createChart start",data);
+    
+      for (let index = 0; index < data.charts.length; index++) {
+        const element = data.charts[index];
+        if(element.type == 'PIE'){
+          data.charts[index] = this.createPieChart(element.chart_data);
+        }else if(element.type == 'LINE'){
+          data.charts[index] = this.createLineChart(element.chart_data);
+        
+      }
+      //data.charts.pop();
+      console.log(" createChart end",data);
+  }
+}
+
+  createLineChart(data){
+
+    var chartData:any[] = [];
+    for(var obj in data){
+      
+      if(!isNaN(data[obj])){
+        chartData.push({
+          name: obj,
+          y: +data[obj],
+          sliced: obj == 'calls' ? true: false,
+          selected: false,
+          color : obj == 'calls' ? 'red': ''
+          
+       });
+      }
+    }
+     var chart = new Chart( {
+      exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+      title: {
+          text: 'Combination chart'
+      },
+      xAxis: {
+          categories: ['Jan', 'Feb', 'March', 'April', 'May',  'June', 'July', 'August']
+      },
+      series: [{
+        type: 'spline',
+        name: 'Calls',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    }, {
+      type: 'spline',
+        name: 'SMS',
+        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+    }, {
+      type: 'spline',
+        name: 'Data',
+        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+    }, {
+      type: 'spline',
+        name: 'Amount',
+        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+    }]
+  });
+  return chart;
+  }
+
 
 
 
