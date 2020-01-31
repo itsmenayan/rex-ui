@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ChatDialogComponent } from './chat-dialog/chat-dialog.component';
+import { ChatDialogComponent, ObjectValuesPipe } from './chat-dialog/chat-dialog.component';
 import { ChatService } from './chat.service';
 
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [
-    ChatDialogComponent
+    ChatDialogComponent,
+    ObjectValuesPipe
   ],
   exports: [ ChatDialogComponent ],
   providers: [ChatService]

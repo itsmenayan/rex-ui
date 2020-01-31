@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import { ChatService, Message } from '../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
@@ -7,6 +7,23 @@ import { SpeechSynthesizerService } from '../../web-speech/shared/services/speec
 import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
 import { $ } from 'protractor';
 
+@Pipe({
+  name: 'objectValues'
+})
+export class ObjectValuesPipe implements PipeTransform {
+  transform(obj: any) {
+    let result = [];
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push({
+          "id": key,
+          "value" : obj[key]
+        });
+      }
+    }
+    return result;
+  }
+}
 
 
 @Component({
@@ -18,7 +35,7 @@ export class ChatDialogComponent implements OnInit {
 
   messages: Observable<Message[]>;
   formValue: string;
-  recognition;
+  recognition:boolean = false;
   finalTranscript = '';
   recognizing = false;
   notification: string;
@@ -37,11 +54,15 @@ export class ChatDialogComponent implements OnInit {
       .scan((acc, val) => {
         console.log(acc);
         console.log(val);
+        if(val[0].sentBy=='bot')
+          this.recognition = false;
         var objDiv = document.getElementById("chatBot");
         objDiv.scrollTop = objDiv.scrollHeight;
 
         return acc.concat(val)
       });
+
+      
 
     this.currentLanguage = this.languages[0];
     this.speechRecognizer.initialize(this.currentLanguage);
@@ -56,6 +77,7 @@ export class ChatDialogComponent implements OnInit {
   }
 
   sendMessage() {
+    this.recognition = true;
     this.chat.converse(this.formValue);
     this.formValue = '';
   }
@@ -72,8 +94,10 @@ export class ChatDialogComponent implements OnInit {
   stopButton() {
     this.detectChanges();
     console.log("Stop" + this.finalTranscript);
-    if(this.finalTranscript != '')
+    if(this.finalTranscript != ''){
+      this.recognition = true;
       this.chat.converse(this.finalTranscript);
+    }
     this.speechRecognizer.stop();
     this.speechSynthesizerService.speak(this.finalTranscript, 'en-US');
 
@@ -129,7 +153,7 @@ export class ChatDialogComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi John. How may I help you?");
+      this.chat.firstMessage("Hi Nayan. How may I help you?");
     }else{
 
     }
