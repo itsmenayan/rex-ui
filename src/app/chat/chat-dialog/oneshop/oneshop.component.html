@@ -103,11 +103,29 @@
     <div class="you-also-like" *ngIf="false">
       <h1><span>You may also like</span></h1>
       <ol class="recommended-order">
-        <li *ngFor="let phone of message.data.data.charts[0].chart_data">
+        <li>
           <div class="order-blk">
             <img src="../../../assets/iphone-11-pro.jpg" alt="" />
             <div class="order-cont">
-              {{phone.name}}
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-7-plus.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 7 Plus (128GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-x1.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone X2 (64GB) - Space Grey
               <button>Buy Now</button>
             </div>
           </div>
@@ -122,7 +140,15 @@
     <!-- <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br> -->
     <button (click)="sendMessage()"><i class="fa fa-share-square-o" aria-hidden="true"></i> Send</button>
     <button (click)="stopButton($event)"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop Record</button>
-    <button (click)="startButton($event)"><i class="fa fa-microphone" aria-hidden="true"></i> Record</button>
+    <button (click)="startButton($event)" style="width: 130px; text-align: center; padding: 0px;">
+      <div class="spinner" *ngIf="recognizing">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+      <i class="fa fa-microphone" aria-hidden="true"  *ngIf="!recognizing"></i> Record</button>
     <!-- <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
     <i class="fa fa-file-image-o"></i> -->
     <!-- <button>Send</button> -->
