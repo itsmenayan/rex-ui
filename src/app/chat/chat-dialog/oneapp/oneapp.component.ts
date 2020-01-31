@@ -1,11 +1,14 @@
+
 import { Component, OnInit, ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
-import { ChatService, Message } from '../chat.service';
+import { ChatService, Message } from '../../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
-import { SpeechRecognizerService } from '../../web-speech/shared/services/speech-recognizer.service';
-import { SpeechSynthesizerService } from '../../web-speech/shared/services/speech-synthesizer.service';
-import { SpeechNotification } from '../../web-speech/shared/model/speech-notification';
+import { SpeechRecognizerService } from '../../../web-speech/shared/services/speech-recognizer.service';
+import { SpeechSynthesizerService } from '../../../web-speech/shared/services/speech-synthesizer.service';
+import { SpeechNotification } from '../../../web-speech/shared/model/speech-notification';
 import { Chart } from 'angular-highcharts';
+
+
 
 @Pipe({
   name: 'objectValues'
@@ -25,13 +28,12 @@ export class ObjectValuesPipe implements PipeTransform {
   }
 }
 
-
 @Component({
-  selector: 'chat-dialog',
-  templateUrl: './chat-dialog.component.html',
-  styleUrls: ['./chat-dialog.component.scss'],
+  selector: 'oneapp',
+  templateUrl: './oneapp.component.html',
+  styleUrls: ['./oneapp.component.scss']
 })
-export class ChatDialogComponent implements OnInit {
+export class OneappComponent implements OnInit {
 
   messages: Observable<Message[]>;
   formValue: string;
@@ -164,7 +166,7 @@ export class ChatDialogComponent implements OnInit {
   closeChatBot() {
     console.log('close chat bot');
     if(this.isShow){
-      this.chat.firstMessage("Hi Nayan. How may I help you?");
+      this.chat.firstMessage("Hi OneApp User. How may I help you?");
     }else{
 
     }

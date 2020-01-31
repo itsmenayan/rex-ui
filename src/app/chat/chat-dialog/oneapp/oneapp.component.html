@@ -1,0 +1,177 @@
+<div class="chatbot" (click)="closeChatBot()" [ngClass]="isShow ? 'bounce' : 'chatbot'">
+  <img src="../assets/chatbot.svg" />
+</div>
+
+<div class="chat"  [hidden] = "isShow">
+
+  <div class="chat-header clearfix" >
+    <img src="../../../assets/dt-logo.jpg" alt="avatar">
+    <div class="chat-about">
+      <div class="chat-with">Chat with John</div>
+      <!-- <div class="chat-num-messages">already 1 902 messages</div> -->
+    </div>
+    <i class="fa fa-close" (click)="closeChatBot()"></i>
+  </div>
+  <div class="chat-history" id="chatBot">
+    <ul >
+    <ng-container *ngFor="let message of messages | async">
+        <li class="clearfix" *ngIf="message.sentBy == 'user'">
+          <div class="message-data align-right">
+            <span class="message-data-time">{{message.timeStamp}}</span> &nbsp; &nbsp;
+            <span class="message-data-name">John</span> <i class="fa fa-circle me"></i>
+          </div>
+          <div class="message other-message float-right">
+            {{ message.content }}
+          </div>
+        </li>
+        <li *ngIf="message.sentBy === 'bot'">
+          <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> DT Assistant</span>
+            <span class="message-data-time">{{message.timeStamp}} </span>
+          </div>
+          <div class="message my-message">
+            {{ message.content }}
+          </div>
+          <table class="table" *ngIf="message.data != null && message.data.type == 'MAP'">
+            <tbody>
+              <tr *ngFor="let obj of message.data.data | objectValues">
+                <th scope="row">{{obj.id}}</th>
+                <td>{{obj.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div  *ngIf="message.data != null && message.data.type == 'CHART'">
+                <div *ngFor="let chart of message.data.data.charts">
+                  <div [chart]="chart"></div>
+                </div>
+
+          </div>
+        </li>
+    </ng-container>
+    </ul>
+    <div class="loader" style="left: 0" *ngIf="recognition">
+      <img src="../../../assets/loader-icon-transparent.svg" style="display: block; width: 30px;" />
+    </div>
+    <ol *ngIf="false">
+      <li>
+        <p>
+          <input type="radio" id="test1" name="radio-group" checked>
+          <label for="test1">Yes</label>
+        </p>
+      </li>
+      <li>
+        <p>
+          <input type="radio" id="test2" name="radio-group">
+          <label for="test2">No</label>
+        </p>
+      </li>
+    </ol>
+
+
+    <table class="table" *ngIf="false">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <label for="nameField">Your Message</label> -->
+
+    <div class="you-also-like">
+      <h1><span>You may also like</span></h1>
+      <ol class="recommended-order">
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="order-blk">
+            <img src="../../../assets/iphone-11-pro.jpg" alt="" />
+            <div class="order-cont">
+              Apple iPhone 11 Pro (64GB) - Space Grey
+              <button>Buy Now</button>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+  <div class="chat-message clearfix">
+    <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" rows="3"></textarea>
+    <!-- <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br> -->
+    <button (click)="sendMessage()"><i class="fa fa-share-square-o" aria-hidden="true"></i> Send</button>
+    <button (click)="stopButton($event)"><i class="fa fa-stop-circle-o" aria-hidden="true"></i> Stop Record</button>
+    <button (click)="startButton($event)"><i class="fa fa-microphone" aria-hidden="true"></i> Record</button>
+    <!-- <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+    <i class="fa fa-file-image-o"></i> -->
+    <!-- <button>Send</button> -->
+  </div>
+</div>
+<div [ngClass]="isShow ? 'overlayHide' : 'overlayShow'"></div>
+
+
+
+
+<div style="display: none; background-color: black;">
+<h1>John </h1>
+
+<ng-container *ngFor="let message of messages | async">
+
+  <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+                                    'to':   message.sentBy === 'user' }">
+    {{ message.content }}
+  </div>
+
+</ng-container>
+
+
+<label for="nameField">Your Message</label>
+
+
+<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br>
+
+<button (click)="sendMessage()">Send</button>
+<button (click)="startButton($event)">Record</button>
+<button (click)="stopButton()">Stop Record</button>
+
+
+</div>
